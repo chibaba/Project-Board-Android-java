@@ -2,19 +2,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardElevation="4dp"
     app:cardCornerRadius="8dp"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
-    >
+    android:layout_marginVertical="8dp">
     
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp">
         <CheckBox
+            android:id="@+id/projectCheckbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            tools:
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
