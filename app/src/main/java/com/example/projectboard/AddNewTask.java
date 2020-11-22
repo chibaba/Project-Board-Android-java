@@ -1,5 +1,7 @@
 package com.example.projectboard;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 
 import com.example.projectboard.Model.TodoBModel;
 import com.example.projectboard.Utils.DatabaseHandler;
@@ -86,18 +89,30 @@ public class AddNewTask extends BottomSheetDialogFragment {
             }
         });
 
+        boolean finalIsUpdate = isUpdate;
         newTaskSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String text = newTaskText.getText().toString();
-                if(isUpdate) {
+                if(finalIsUpdate) {
                     db.updateTask(bundle.getInt("id"), text);
                 }
                 else {
                     TodoBModel task = new TodoBModel();
+                    task.setTask(text);
+                    task.setStatus(0);
                 }
+                dismiss();
             }
         });
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        Activity activity = getActivity();
+        if(activity instanceof DialogCloseListerner) {
+            ((DialogCloseListerner)activity).handleDialogClose(dialog);
+        }
     }
 
 }
