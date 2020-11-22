@@ -1,8 +1,15 @@
 package com.example.projectboard.Utils;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.projectboard.Model.TodoBModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -35,5 +42,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void openDataBase() {
         db = this.getWritableDatabase();
+    }
+
+    public void insertTask(TodoBModel task) {
+        ContentValues cv = new ContentValues();
+        cv.put(TASK, task.getTask());
+        cv.put(STATUS, 0);
+        db.insert(TODO_TABLE, null, cv);
+    }
+
+    public List<TodoBModel> getAllTasks() {
+        List<TodoBModel> taskList = new ArrayList<>();
+        Cursor cur = null;
+        db.beginTransaction();
+        try {
+            cur = db.query(TODO_TABLE, null, null, null, null, null, null, null);
+
+        }
     }
 }
