@@ -1,5 +1,6 @@
 package com.example.projectboard.Adapter;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +70,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
         db.deleteTask( item.getId());
         todoList.remove(position);
         notifyItemRemoved(position);
+    }
+
+    public Context  getContext() {
+        return activity;
     }
 
      public void editItem(int position) {
