@@ -57,7 +57,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.beginTransaction();
         try {
             cur = db.query(TODO_TABLE, null, null, null, null, null, null, null);
-
+              if(cur != null) {
+                  if(cur.moveToFirst()) {
+                      do {
+                          TodoBModel task = new TodoBModel();
+                          task.setId((cur.getColumnIndex(ID)));
+                      }
+                  }
+              }
         }
+        db.endTransaction();
     }
 }
