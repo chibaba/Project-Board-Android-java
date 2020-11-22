@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectboard.MainActivity;
 import com.example.projectboard.Model.TodoBModel;
 import com.example.projectboard.R;
+import com.example.projectboard.Utils.DatabaseHandler;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
 
     private List<TodoBModel> todoList;
     private MainActivity activity;
+    private DatabaseHandler db;
 
     public TodoAdapter(MainActivity activity) {
         this.activity = activity;
