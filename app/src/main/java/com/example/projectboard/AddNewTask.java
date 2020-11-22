@@ -1,5 +1,6 @@
 package com.example.projectboard;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 
 import androidx.core.content.ContextCompat;
 
+import com.example.projectboard.Model.TodoBModel;
 import com.example.projectboard.Utils.DatabaseHandler;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -67,11 +69,33 @@ public class AddNewTask extends BottomSheetDialogFragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+                if(s.toString().equals("")) {
+                    newTaskSaveButton.setEnabled(false);
+                    newTaskSaveButton.setTextColor(Color.GRAY);
+                }
+                else {
+                    newTaskSaveButton.setEnabled(true);
+                    newTaskSaveButton.setTextColor(ContextCompat.getColor(getContext(),R.color.design_default_color_secondary));
+                }
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        newTaskSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = newTaskText.getText().toString();
+                if(isUpdate) {
+                    db.updateTask(bundle.getInt("id"), text);
+                }
+                else {
+                    TodoBModel task = new TodoBModel();
+                }
             }
         });
     }
