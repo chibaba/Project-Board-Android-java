@@ -2,7 +2,12 @@ package com.example.projectboard;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Canvas;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.view.View;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,5 +51,21 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
         else {
             adapter.editItem(position);
         }
+      }
+
+      @Override
+    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+        Drawable icon;
+          ColorDrawable background;
+
+          View itemView = viewHolder.itemView;
+          int backgroundCornerOffset = 20;
+
+          if(dX>0) {
+              icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_baseline_edit);
+              background = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.design_default_color_primary_variant))
+          }
       }
 }
