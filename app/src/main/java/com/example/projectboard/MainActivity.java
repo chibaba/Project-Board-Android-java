@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.example.projectboard.Adapter.TodoAdapter;
 import com.example.projectboard.Model.TodoBModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
+
+        taskList = new ArrayList<>();
 
         tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
 
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         taskList.add(task);
         taskList.add(task);
         taskList.add(task);
+
+        tasksAdapter.setTasks(taskList);
 
 
     }
