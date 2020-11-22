@@ -1,12 +1,16 @@
 package com.example.projectboard;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.core.content.ContextCompat;
 
 import com.example.projectboard.Utils.DatabaseHandler;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -40,6 +44,36 @@ public class AddNewTask extends BottomSheetDialogFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         newTaskText = getView().findViewById(R.id.newTaskText);
+        newTaskSaveButton = getView().findViewById(R.id.newTaskButton);
+
+        db = new DatabaseHandler(getActivity());
+        db.openDataBase();
+
+        boolean isUpdate = false;
+        final Bundle bundle = getArguments();
+        if(bundle != null) {
+            isUpdate = true;
+            String task = bundle.getString("task");
+            newTaskText.setText(task);
+            if(task.length() > 0)
+                newTaskSaveButton.setTextColor(ContextCompat.getColor(getContext(),R.color.design_default_color_secondary));
+        }
+        newTaskText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
 }
