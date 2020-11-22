@@ -64,6 +64,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
     }
 
 
+    public void deleteItem(int position) {
+        TodoBModel item = todoList.get(position);
+        db.deleteTask( item.getId());
+        todoList.remove(position);
+        notifyItemRemoved(position);
+    }
 
      public void editItem(int position) {
         TodoBModel item = todoList.get(position);
