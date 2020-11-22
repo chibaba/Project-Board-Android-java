@@ -62,10 +62,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                       do {
                           TodoBModel task = new TodoBModel();
                           task.setId((cur.getColumnIndex(ID)));
-                      }
+                          task.setTask(cur.getString(cur.getColumnIndex(TASK)));
+                          task.setStatus(cur.getInt(cur.getColumnIndex(STATUS)));
+                          taskList.add(task);
+                      }while(cur.moveToNext());
                   }
               }
         }
-        db.endTransaction();
+        finally {
+            db.endTransaction();
+            cur.close();
+        }
+        return taskList;
+    }
+
+    public void updateStatus(int id, int status) {
+        ContentValues cv = new ContentValues();
     }
 }
