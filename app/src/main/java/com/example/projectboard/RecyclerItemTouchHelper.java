@@ -3,6 +3,7 @@ package com.example.projectboard;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -65,7 +66,22 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
           if(dX>0) {
               icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_baseline_edit);
-              background = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.design_default_color_primary_variant))
+              background = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.design_default_color_primary_variant));
+          } else {
+              icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_baseline_delete_24);
+              background = new ColorDrawable(Color.RED);
           }
+
+          int iconMargin = (itemView.getHeight() - icon.getIntrinsicHeight()) /2;
+          int iconTop = itemView.getTop() + (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
+
+          int iconButtom = iconTop + icon.getIntrinsicHeight();
+
+          if(dX > 0 ) {// swiping to the right
+              int iconLeft = itemView.getLeft() + iconMargin;
+              int iconRight =  itemView.getLeft() + iconMargin + icon.getIntrinsicWidth();
+              icon.setBounds(iconLeft, iconTop, iconRight, iconButtom);
+
+
       }
 }
